@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rock Paper Scissors Game</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      h1 {
+        text-align: center;
+      }
+      .game-options {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+      .player-option {
+        padding: 10px 20px;
+        background-color: #ddd;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .player-option.active {
+        background-color: #333;
+        color: #fff;
+      }
+      .result {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+      .score {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #eee;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-weight: bold;
+        font-size: 20px;
+      }
+      .score span {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Rock Paper Scissors Game</h1>
+    <div class="game-options">
+      <div class="player-option active" id="adam">Adam</div>
+      <div class="player-option" id="bob">Bob</div>
+      <div class="player-option" id="tuna">Tuna</div>
+      <div class="player-option" id="leo">Leo</div>
+      <div class="player-option" id="andre">Andre</div>
+    </div>
+    <div class="result">Choose your move:</div>
+    <div class="game-options">
+      <div class="player-option" id="rock">Rock</div>
+      <div class="player-option" id="paper">Paper</div>
+      <div class="player-option" id="scissors">Scissors</div>
+    </div>
+    <div class="score">
+      <span id="player-score">0</span>
+      <span>vs</span>
+      <span id="computer-score">0</span>
+    </div>
+    <script>
+      const players = ["Adam", "Bob", "Tuna", "Leo", "Andre"];
+      let player = "Adam";
+      let playerScore = 0;
+      let computerScore = 0;
+      let gameResult = "";
+
+      // Function to set active player
+      function setActivePlayer(e) {
+        const activeOption = document.querySelector(".player-option.active");
+        if (activeOption) {
+          activeOption.classList.remove("active");
+        }
+        e.target.classList.add("active");
+        player = e.target.id.charAt(0).toUpperCase() + e.target.id.slice(1);
+        resetGame();
+      }
+
+      // Function to get computer's move
+      function getComputerMove() {
+        const moves = ["Rock", "Paper", "Scissors"];
+        const randomIndex = Math.floor(Math.random() * moves.length);
+        return moves[randomIndex];
+      }
+
+      // Function to check game result
+      function checkResult(playerMove, computerMove) {
+        if (playerMove === computerMove) {
+          return "Tie";
+        } else
